@@ -1,0 +1,36 @@
+import random
+import string
+
+def passwort_generieren(laenge, grossbuchstaben=True, kleinbuchstaben=True, zahlen=True, sonderzeichen=True):
+    zeichen = ""
+    if grossbuchstaben:
+        zeichen += string.ascii_uppercase
+    if kleinbuchstaben:
+        zeichen += string.ascii_lowercase
+    if zahlen:
+        zeichen += string.digits
+    if sonderzeichen:
+        zeichen += string.punctuation
+
+    if not zeichen:
+        print("Keine Zeichen zum Generieren eines Passworts ausgewählt.")
+        return ""
+
+    passwort = ''.join(random.choice(zeichen) for _ in range(laenge))
+    return passwort
+
+def main():
+    print("Einfacher Passwort-Generator")
+    laenge = int(input("Gib die gewünschte Passwortlänge ein: "))
+
+    grossbuchstaben = input("Großbuchstaben einschließen? (ja/nein): ").lower() == 'ja'
+    kleinbuchstaben = input("Kleinbuchstaben einschließen? (ja/nein): ").lower() == 'ja'
+    zahlen = input("Zahlen einschließen? (ja/nein): ").lower() == 'ja'
+    sonderzeichen = input("Sonderzeichen einschließen? (ja/nein): ").lower() == 'ja'
+
+    passwort = passwort_generieren(laenge, grossbuchstaben, kleinbuchstaben, zahlen, sonderzeichen)
+    if passwort:
+        print(f"Generiertes Passwort: {passwort}")
+
+if __name__ == "__main__":
+    main()
